@@ -103,10 +103,10 @@ class Home : AppCompatActivity(),TopBarTitleChangeListener  {
             }
         }
 
-        binding.bottomNavicationBar.background = null
+        binding.bottomNavigationBar.background = null
         replaceFragment(Category())
 
-        binding.bottomNavicationBar.setOnItemSelectedListener { menuItem ->
+        binding.bottomNavigationBar.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.category -> {
                     replaceFragment(Category())

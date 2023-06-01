@@ -60,23 +60,31 @@ class Product : Fragment(), ProductAdapter.OnItemClickListener {
             ProductViewModelFactory(repository)
         ).get(ProductViewModel::class.java)
         progressBar = binding.progressBar
-        initializeRecyclerView()
+
         progressBar.visibility = View.VISIBLE
         productViewModel.products.observe(viewLifecycleOwner, Observer { products ->
             products?.let {
                 productList.addAll(products.products)
                 Log.d("tag", products.products.size.toString())
-                productAdapter.notifyDataSetChanged()
+                initializeRecyclerView()
                 progressBar.visibility = View.GONE
             }
         })
     }
 
     private fun initializeRecyclerView() {
-        productAdapter = ProductAdapter(productList, this)
-        binding.recyclerProducts.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = productAdapter
+        if (productList.isEmpty()) {
+            binding.emptyStateTextView.visibility = View.VISIBLE
+            binding.recyclerProducts.visibility = View.GONE
+        } else {
+            binding.emptyStateTextView.visibility = View.GONE
+            binding.recyclerProducts.visibility = View.VISIBLE
+
+            productAdapter = ProductAdapter(productList, this)
+            binding.recyclerProducts.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = productAdapter
+            }
         }
     }
 

@@ -9,9 +9,35 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_products"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="#006a4e"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_products"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_products"
+        app:layout_constraintStart_toStartOf="@+id/recycler_products"
+        app:layout_constraintTop_toTopOf="@+id/recycler_products"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/emptyStateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No products available"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="@id/recycler_products"
+        app:layout_constraintBottom_toBottomOf="@id/recycler_products"
+        app:layout_constraintStart_toStartOf="@id/recycler_products"
+        app:layout_constraintEnd_toEndOf="@id/recycler_products"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

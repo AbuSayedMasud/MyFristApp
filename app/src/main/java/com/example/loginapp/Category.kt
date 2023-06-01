@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.loginapp.Api.ApiService
@@ -28,7 +29,22 @@ class Category : Fragment(),CategoryAdapter.OnItemClickListener {
     private lateinit var productViewModel: ProductViewModel
     private lateinit var categoryList: Categories
     private var topBarTitleChangeListener: TopBarTitleChangeListener? = null
-
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(binding.root.context, R.anim.rotate_open)
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(binding.root.context, R.anim.rotate_close)
+    }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(binding.root.context, R.anim.from_bottom)
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(binding.root.context, R.anim.to_bottom)
+    }
+    private var clicked =false
+    private lateinit var add_btn: FloatingActionButton
+    private lateinit var atoZ: FloatingActionButton
+    private lateinit var Ztoa: FloatingActionButton
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is TopBarTitleChangeListener) {
@@ -71,9 +87,22 @@ class Category : Fragment(),CategoryAdapter.OnItemClickListener {
                 progressBar.visibility = View.GONE
             }
         })
+        binding.addBtn.setOnClickListener {
+            onAddButtonClick()
+        }
     }
 
     private fun initializeRecyclerView() {
+        binding.atoz.setOnClickListener {
+            categoryList.sort()
+            categoryAdapter.notifyDataSetChanged()
+            Log.d("sort", categoryList.toString())
+        }
+        binding.ztoa.setOnClickListener {
+            categoryList.sortDescending()
+            categoryAdapter.notifyDataSetChanged()
+            Log.d("sort", categoryList.toString())
+        }
 
         categoryAdapter = CategoryAdapter(categoryList,this)
         val recyclerView: androidx.recyclerview.widget.RecyclerView = binding.recyclerView
@@ -89,4 +118,42 @@ class Category : Fragment(),CategoryAdapter.OnItemClickListener {
         }
         startActivity(intent)
     }
+    private fun onAddButtonClick(){
+        setVisiblity(clicked)
+        setAnimation(clicked)
+        setClickable(clicked)
+        clicked = !clicked
+    }
+
+    private fun setAnimation(click: Boolean) {
+        if(!click){
+            binding.atoz.startAnimation(fromBottom)
+            binding.ztoa.startAnimation(fromBottom)
+            binding.addBtn.startAnimation(rotateOpen)
+        }
+        else{
+            binding.atoz.startAnimation(toBottom)
+            binding.ztoa.startAnimation(toBottom)
+            binding.addBtn.startAnimation(rotateClose)
+        }
+    }
+
+    private fun setVisiblity(click: Boolean) {
+        if(!click){
+            binding.atoz.visibility= View.VISIBLE
+            binding.ztoa.visibility= View.VISIBLE
+            binding.atoz.startAnimation(rotateOpen)
+            binding.ztoa.startAnimation(rotateOpen)
+        }
+        else
+        {
+           binding.atoz.visibility=View.INVISIBLE
+            binding.ztoa.visibility=View.INVISIBLE
+        }
+    }
+    private fun setClickable(click: Boolean){
+        binding.atoz.isClickable = !click
+        binding.ztoa.isClickable = !click
+    }
+
 }

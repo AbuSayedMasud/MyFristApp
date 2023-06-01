@@ -27,10 +27,7 @@
                 app:navigationIconTint="#ffffff"
                 app:title="Shadhin"
                 app:titleTextColor="#ffffff"
-                app:titleCentered="true">
-
-            </com.google.android.material.appbar.MaterialToolbar>
-
+                app:titleCentered="true" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,14 +42,14 @@
             android:id="@+id/frame_Layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_Navication_bar"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_Navigation_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline"
             app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_Navication_bar"
+            android:id="@+id/bottom_Navigation_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -74,6 +71,6 @@
         app:menu="@menu/my_navigation_items"
         app:itemIconTint="#006a4e"
         app:itemTextColor="#006a4e"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
