@@ -6,6 +6,9 @@ import com.example.loginapp.repository.ProductRepository
 
 class ProductViewModelFactory(private val repository:ProductRepository):ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ProductViewModel(repository) as T
+        if (modelClass.isAssignableFrom(ProductViewModel::class.java)) {
+            return ProductViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

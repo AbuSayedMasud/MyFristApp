@@ -26,6 +26,20 @@
         app:layout_constraintStart_toStartOf="@+id/recycler_products"
         app:layout_constraintTop_toTopOf="@+id/recycler_products"
         android:visibility="gone" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#006a4e"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/emptyStateTextView"
@@ -39,5 +53,6 @@
         app:layout_constraintStart_toStartOf="@id/recycler_products"
         app:layout_constraintEnd_toEndOf="@id/recycler_products"
         android:visibility="gone" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

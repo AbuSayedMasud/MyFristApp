@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.loginapp.Api.ApiService
 import com.example.loginapp.models.Categories
+import com.example.loginapp.models.Product
 import com.example.loginapp.models.ProductInfo
+import com.example.loginapp.models.ProductResponse
+import retrofit2.Response
 
 class ProductRepository(private val apiService: ApiService) {
     private val _categoryLiveData = MutableLiveData<Categories>()
@@ -25,5 +28,8 @@ class ProductRepository(private val apiService: ApiService) {
         result?.body().let {
             _productsLiveData.postValue(result.body())
         }
+    }
+    suspend fun createProduct(product:Product): Response<ProductResponse> {
+        return apiService.createProduct(product)
     }
 }

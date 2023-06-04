@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +28,7 @@ class Product : Fragment(), ProductAdapter.OnItemClickListener {
     private lateinit var productViewModel: ProductViewModel
     private var productList: MutableList<Product> = mutableListOf()
     private var topBarTitleChangeListener: TopBarTitleChangeListener? = null
+    private lateinit var add_btn: FloatingActionButton
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,6 +69,10 @@ class Product : Fragment(), ProductAdapter.OnItemClickListener {
                 progressBar.visibility = View.GONE
             }
         })
+        binding.addBtn.setOnClickListener {
+            var intent=Intent(requireContext(), Add::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initializeRecyclerView() {
